@@ -1,5 +1,5 @@
-var ship,shipImg1;
-var seaImg,sea,InvisibleSea;
+var sea,ship;
+var seaImg,shipImg1;
 
 function preload(){
  shipImg1 = loadAnimation("ship-1.png","ship-2.png","ship-3.png","ship-4.png");
@@ -8,33 +8,39 @@ function preload(){
 
 function setup(){
   createCanvas(400,400);
-
-  ship = createSprite(50,180,20,50);
-  ship.addAnimation("running", shipImg1);
-
-  ship.scale = 0.2;
-  ship.x = 100
-
-  sea = createSprite(200,200,200,200);
+  background("blue");
+  
+  sea = createSprite(400,200);
   sea.addImage(seaImg);
+  sea.velocityX = -5;
+  sea.scale=0.3;
+
+  ship = createSprite(130,200,30,30);
+  ship.addAnimation("movingShip", shipImg1);
+  ship.scale = 0.25;
+
+  
   
 }
 
 function draw() {
-  background(220);
-  if(keyDown("UP_ARROW")) {
-    ship.velocityY = -10;
+  background("blue");
+
+//codigo para reiniciar el fondo.
+if (sea.x <0){
+  sea.x=sea.widht/2;
+}
+
+  sea.velocityX = -3;
+
+    if(keyDown("UP_ARROW")) {
+    ship.velocityY = -1;
   }
   if(keyDown("DOWN_ARROW")) {
-    ship.velocityY = +10;
+    ship.velocityY = +1;
   }
-  //codigo para reiniciar el fondo.
-    if (sea.x <0){
-    sea.x=sea.widht/2;
-  }
-
-  sea.velocityX = sea.velocityX + 0.5
-
   
+
+ 
  drawSprites();
 }
